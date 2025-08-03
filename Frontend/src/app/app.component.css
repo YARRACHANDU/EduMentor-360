@@ -1,0 +1,11 @@
+nav{
+    background:linear-gradient(to right, #4e54c8, #8f94fb);
+}
+.login{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+.nav-link{
+    color: white;
+}
