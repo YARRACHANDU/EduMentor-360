@@ -1,27 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class Login {
-  ngAfterViewInit() {
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
+export class Login implements OnInit {
+  
+  isSignUpMode = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    // Using Angular approach instead of direct DOM manipulation
+    setTimeout(() => {
+      const signUpButton = document.getElementById('signUp');
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
+
+      if (signUpButton && container) {
+        signUpButton.addEventListener('click', () => {
+          this.toggleSignUpMode(true);
+        });
+      }
+
+      if (signInButton && container) {
+        signInButton.addEventListener('click', () => {
+          this.toggleSignUpMode(false);
+        });
+      }
+    });
+  }
+
+  toggleSignUpMode(isSignUp: boolean) {
+    this.isSignUpMode = isSignUp;
     const container = document.getElementById('container');
-
-    if (signUpButton && container) {
-      signUpButton.addEventListener('click', () => {
-        container.classList.add("right-panel-active");
-      });
+    if (container) {
+      if (isSignUp) {
+        container.classList.add('right-panel-active');
+      } else {
+        container.classList.remove('right-panel-active');
+      }
     }
+  }
 
-    if (signInButton && container) {
-      signInButton.addEventListener('click', () => {
-        container.classList.remove("right-panel-active");
-      });
-    }
+  onSignIn(event: Event) {
+    event.preventDefault();
+    console.log('Sign In clicked');
+    // Add your sign-in logic here
+  }
+
+  onSignUp(event: Event) {
+    event.preventDefault();
+    console.log('Sign Up clicked');
+    // Add your sign-up logic here
   }
 }
