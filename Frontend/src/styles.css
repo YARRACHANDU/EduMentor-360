@@ -1,5 +1,4 @@
 body{
-    background-image: url('assets/images/background.jpg');
-    background-size: cover;
-    color: red;
+    background-color: aqua;
+    color:red;
 }
